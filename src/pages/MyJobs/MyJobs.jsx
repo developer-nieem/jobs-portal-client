@@ -54,6 +54,18 @@ const MyJobs = () => {
       });
   };
 
+  const handleJobDeltete =  id =>{
+    fetch(`http://localhost:3000/deletejob/${id}` , {
+      method: 'DELETE'
+    })
+    .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if(data.deletedCount > 0){
+          setControl(!control);
+        }
+      })
+  }
   return (
     <div>
       <div className="my-jobs-container">
@@ -99,7 +111,7 @@ const MyJobs = () => {
                 </td>
                 <td>
                   {" "}
-                  <button>Delete</button>
+                  <button onClick={() => handleJobDeltete(job._id)}>Delete</button>
                 </td>
               </tr>
             ))}
